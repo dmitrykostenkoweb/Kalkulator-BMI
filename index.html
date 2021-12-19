@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <section class="section__wrapper">
+      <h2 class="section-title">Prawidłowa waga</h2>
+      <div class="divider"></div>
+      <p class="calc-sub-title">
+        Tutaj znajdziesz niezbędne i najpopularniejsze narzędzia służące
+        sprawdzeniu prawidłowości Twojej wagi.
+      </p>
+      <h3 class="calc-name">Kalkulator BMI</h3>
+      <p class="calc-sub-title__orange">Oblicz stan swojej wagi</p>
+      <p class="calc-sub-title">
+        Wystarczy podać swój wzrost i aktualną wagę a kalkulator BMI obliczy czy
+        Twoja waga jest prawidłowa.
+      </p>
+      <div class="calc__wrapper">
+        <div class="inputs">
+          <div class="input__item">
+            <label class="calc-sub-title" for="height">Wzrost (cm)</label>
+            <input
+              id="height"
+              class="input main-styles"
+              placeholder="Wzrost cm "
+              type="text"
+            />
+          </div>
+          <div class="input__item">
+            <label class="calc-sub-title" for="weight">Waga (kg)</label>
+            <input
+              id="weight"
+              class="input main-styles"
+              placeholder="Waga kg "
+              type="text"
+            />
+          </div>
+        </div>
+        <button class="btn main-styles">Przelicz</button>
+      </div>
+      <p class="result-text"></p>
+
+      <div class="progress__container">
+        <p class="diagnosis calc-sub-title"></p>
+        <div class="progress">
+          <div class="progress-bar"></div>
+        </div>
+      </div>
+    </section>
+    <script src="./script.js"></script>
+  </body>
+</html>

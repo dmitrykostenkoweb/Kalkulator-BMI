@@ -1,0 +1,242 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap");
+/*Обнуление*/
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+:focus,
+:active {
+  outline: none;
+}
+a:focus,
+a:active {
+  outline: none;
+}
+
+nav,
+footer,
+header,
+aside {
+  display: block;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  font-family: "Open Sans", sans-serif;
+}
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+a,
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+ul li {
+  list-style: none;
+}
+img {
+  vertical-align: top;
+}
+
+.main-styles {
+  border: 1px solid grey;
+  border-radius: 5px;
+  box-shadow: rgb(85 85 85) 1px 1px 0px;
+  font-family: "Open Sans", sans-serif;
+  transition: 0.2s;
+}
+.main-styles:hover {
+  box-shadow: rgb(85 85 85) 0px 0px 0px;
+}
+.divider {
+  width: 70%;
+  height: 0.5px;
+  background-color: rgba(128, 128, 128, 0.5);
+  border-radius: 10px;
+}
+
+.section__wrapper {
+  margin: 100px auto;
+  max-width: 800px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+  padding: 20px;
+}
+
+.section-title {
+  text-shadow: rgb(102 102 102) 1px 1px 0px;
+  font-weight: 400;
+  color: #769e25;
+  font-size: 44px;
+  line-height: 52px;
+  text-align: center;
+  padding: 8px;
+}
+.calc-name {
+  font-family: "Racing Sans One", cursive;
+  font-size: 32px;
+  line-height: 38px;
+  text-align: center;
+  color: #999999;
+  text-shadow: 1px 1px 0px #e66a17;
+}
+
+.calc-sub-title {
+  color: #666666;
+  font-size: 16px;
+  line-height: 25px;
+  text-align: center;
+  font-weight: 600;
+}
+.calc-sub-title__orange {
+  color: #e66a17;
+  font-size: 16px;
+  line-height: 25px;
+  text-align: center;
+  font-weight: 600;
+}
+.calc__wrapper {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-end;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.input__item {
+  display: flex;
+  gap: 20px;
+  align-items: space-evenly;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+.input {
+  width: 150px;
+  height: 40px;
+  padding: 4px 8px;
+  background-color: #c9c9c9;
+}
+.btn {
+  width: 150px;
+  height: 40px;
+  padding: 4px 8px;
+  background-color: #e66a17;
+  transition: 0.2s;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  color: white;
+  font-weight: 600;
+  margin: 0 5px 20px;
+  padding: 3px 8px;
+  text-shadow: 0 1px black;
+  border-radius: 3px;
+}
+.btn:active {
+  background-color: #e61717;
+}
+
+/* ____________________________ */
+
+.progress__container {
+  margin: 20px auto;
+  text-align: center;
+  width: 100%;
+}
+
+.container .progress {
+  margin: 0 auto;
+  max-width: 400px;
+}
+
+.progress {
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25),
+    0 1px rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25),
+    0 1px rgba(255, 255, 255, 0.08);
+}
+
+.progress-bar {
+  position: relative;
+  width: 0%;
+  height: 16px;
+  border-radius: 4px;
+  background-image: -webkit-linear-gradient(
+    top,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.05)
+  );
+  transition: 1s;
+}
+
+.progress-bar::after {
+  content: "➤";
+  color: #e66a17;
+
+  position: absolute;
+  transform: rotate(-90deg);
+  font-size: 30px;
+  top: 10px;
+  right: -10px;
+  text-shadow: 2px 2px 5px black;
+}
+
+
+.result-text {
+  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+
+  font-weight: 600;
+  margin: 0 5px 20px;
+  padding: 3px 8px;
+  text-shadow: 0 1px black;
+  border-radius: 3px;
+}
+.diagnosis {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
