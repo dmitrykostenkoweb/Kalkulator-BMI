@@ -78,7 +78,11 @@ function outputInfo() {
   if (res > 35 && res <= 40) {
     progressWidth.style.background = "#b83e09";
     diagnosis = "II stopień otyłości";
-    progressWidth.style.width = `${85 + res / 2}%`;
+    let maxPercent = 85 + res / 10;
+    if (maxPercent > 100) {
+      maxPercent = 99;
+    }
+    progressWidth.style.width = `${maxPercent}%`;
     diagnosisText.style.color = "#b83e09";
   }
   if (res >= 40) {
