@@ -38,30 +38,58 @@ function outputInfo() {
   const progressWidth = document.querySelector(".progress-bar");
   const scale = document.querySelector(".label");
   const diagnosisText = document.querySelector(".diagnosis");
-
-  if (calcResult.toFixed() < 18) {
-    progressWidth.style.background = "#f63a0f";
+  const res = calcResult.toFixed();
+  if (res <= 16) {
+    progressWidth.style.background = "#1d3057";
     diagnosis = "Wygłodzenie";
-    progressWidth.style.width = "25%";
+    progressWidth.style.width = `${10 + res / 2}%`;
     diagnosisText.style.color = "#1d3057";
   }
-  if (calcResult.toFixed() > 18 && calcResult.toFixed() < 25) {
-    progressWidth.style.background = "#86e01e";
-    diagnosis = "Normalna masa ciała";
-    progressWidth.style.width = "50%";
-    diagnosisText.style.color = "#86e01e";
+  if (res > 16 && res <= 17) {
+    progressWidth.style.background = "#3a63b5";
+    diagnosis = "Wychudzenie";
+    progressWidth.style.width = `${20 + res / 2}%`;
+    diagnosisText.style.color = "#3a63b5";
   }
-  if (calcResult.toFixed() > 25 && calcResult.toFixed() < 30) {
-    progressWidth.style.background = "#f27011";
+  if (res > 17 && res <= 18.5) {
+    progressWidth.style.background = "#369adc";
+    diagnosis = "Niedowaga";
+    progressWidth.style.width = `${35 + res / 2}%`;
+    diagnosisText.style.color = "#369adc";
+  }
+  if (res > 18.5 && res <= 25) {
+    progressWidth.style.background = "#68a13a";
+    diagnosis = "Waga prawidłowa";
+    progressWidth.style.width = `${40 + res / 2}%`;
+    diagnosisText.style.color = "#68a13a";
+  }
+  if (res > 25 && res <= 30) {
+    progressWidth.style.background = "#e66a17";
     diagnosis = "Nadwaga";
-    progressWidth.style.width = "75%";
-    diagnosisText.style.color = "#f27011";
+    progressWidth.style.width = `${50 + res / 2}%`;
+    diagnosisText.style.color = "#e66a17";
   }
-  if (calcResult.toFixed() > 30) {
-    progressWidth.style.background = "#ff2f00";
-    diagnosis = "Otyłość";
-    progressWidth.style.width = "100%";
-    diagnosisText.style.color = "#ff2f00";
+  if (res > 30 && res <= 35) {
+    progressWidth.style.background = "#e84600";
+    diagnosis = "I stopień otyłości";
+    progressWidth.style.width = `${70 + res / 2}%`;
+    diagnosisText.style.color = "#e84600";
+  }
+  if (res > 35 && res <= 40) {
+    progressWidth.style.background = "#b83e09";
+    diagnosis = "II stopień otyłości";
+    progressWidth.style.width = `${85 + res / 2}%`;
+    diagnosisText.style.color = "#b83e09";
+  }
+  if (res >= 40) {
+    progressWidth.style.background = "#8a300a";
+    diagnosis = "III stopień otyłości (otyłość skrajna)";
+    let maxPercent = 90 + res / 10;
+    if (maxPercent > 100) {
+      maxPercent = 99;
+    }
+    progressWidth.style.width = `${maxPercent}%`;
+    diagnosisText.style.color = "#8a300a";
   }
 
   //
@@ -82,5 +110,18 @@ function showResult() {
   resultBtn.addEventListener("click", () => {
     outputInfo();
   });
+  weight.addEventListener("keydown", (event) => {
+    doThis(event);
+  });
+  height.addEventListener("keydown", (event) => {
+    doThis(event);
+  });
+
+  function doThis(event) {
+    if (event.key === "Enter") {
+      console.log("do this");
+      outputInfo();
+    }
+  }
 }
 showResult();
