@@ -39,6 +39,7 @@ function outputInfo() {
   const res = calcResult.toFixed();
   const wynik = document.querySelector(".wynik");
   const wynikText = document.querySelector(".wynik-text");
+  wynik.style.display = "";
   function conditions() {
     if (res <= 16) {
       progressWidth.style.background = "#1d3057";
@@ -125,6 +126,8 @@ function outputInfo() {
     height.style.border = "1px solid red";
     weight.style.border = "1px solid red";
     document.querySelector(".result-title").style.display = "none";
+    wynikText.style.transform = "translateX(-2000%)";
+    wynik.style.display = "none";
   } else {
     const step = 0.09;
     const time = 1000;
