@@ -68,6 +68,24 @@ img {
   vertical-align: top;
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input[type="number"]:hover,
+input[type="number"]:focus {
+  -moz-appearance: number-input;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .main-styles {
   border: 1px solid grey;
   border-radius: 5px;
@@ -100,7 +118,7 @@ img {
 
 .calc-sub-title {
   color: #999;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 25px;
   text-align: center;
   font-weight: 600;
@@ -134,6 +152,7 @@ img {
   height: 40px;
   padding: 4px 8px;
   background-color: #c9c9c9;
+  -moz-appearance: textfield;
 }
 .btn {
   width: 150px;
@@ -198,7 +217,6 @@ img {
   font-size: 30px;
   top: 25px;
   right: -10px;
-  text-shadow: 1px 1px 30px black;
 }
 
 .result-text {
@@ -209,7 +227,7 @@ img {
   text-shadow: 0 1px black;
 }
 .diagnosis {
-  font-size: 25px;
+  font-size: 16px;
   margin-bottom: 10px;
 }
 .result__wrapper {
