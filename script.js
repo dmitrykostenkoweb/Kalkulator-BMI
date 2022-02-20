@@ -1,51 +1,99 @@
+// variables
+
 const weight = document.getElementById("weight");
 const height = document.getElementById("height");
-const resultBtn = document.querySelector("#result-btn");
-const resultText = document.querySelector(".result-text");
+
+const errorMassage = document.querySelector(".result-title");
+
+const calculationHandler = document.querySelector("#result-btn");
+const bmi = document.querySelector(".result-text");
 const progressWidth = document.querySelector(".progress-bar");
-const diagnosisText = document.querySelector(".diagnosis");
-const wynik = document.querySelector(".wynik");
-const wynikText = document.querySelector(".wynik-text");
+
+const diagnosis = document.querySelector(".diagnosis");
+const descriptionText = document.querySelector(".description-text");
+
+const textData = {
+  wyglodzenie:
+    "Inny tekst w przypadku Wygłodzenie.  Niestety Twoja waga jest nieprawidłowa. Musisz zadbać o stan swojej  wagi. Jednym ze sposobów poprawy wagi to prawidłowa dieta.",
+  wychudzenie:
+    "Inny tekst w przypadku Wychudzenie.  Niestety Twoja waga jest nieprawidłowa. Musisz zadbać o stan swojej  wagi. Jednym ze sposobów poprawy wagi to prawidłowa dieta.",
+  niedowaga:
+    "Inny tekst w przypadku Niedowaga.  Niestety Twoja waga jest nieprawidłowa. Musisz zadbać o stan swojej  wagi. Jednym ze sposobów poprawy wagi to prawidłowa dieta. ",
+  wagaPrawidlowa:
+    "Inny tekst w przypadku Waga prawidłowa.  Niestety Twoja waga jest nieprawidłowa. Musisz zadbać o stan swojej  wagi. Jednym ze sposobów poprawy wagi to prawidłowa dieta.",
+  nadwaga:
+    "Inny tekst w przypadku Nadwaga.  Niestety Twoja waga jest nieprawidłowa. Musisz zadbać o stan swojej  wagi. Jednym ze sposobów poprawy wagi to prawidłowa dieta.",
+  stopienOtylosci1:
+    "Inny tekst w przypadku 1 stopień otyłości.  Niestety Twoja waga jest nieprawidłowa. Musisz zadbać o stan swojej  wagi. Jednym ze sposobów poprawy wagi to prawidłowa dieta.",
+  stopienOtylosci2:
+    "Inny tekst w przypadku 2 stopień otyłości.  Niestety Twoja waga jest nieprawidłowa. Musisz zadbać o stan swojej  wagi. Jednym ze sposobów poprawy wagi to prawidłowa dieta.",
+  stopienOtylosci3:
+    "Inny tekst w przypadku 3 stopień otyłości (otyłość skrajna).  Niestety Twoja waga jest nieprawidłowa. Musisz zadbać o stan swojej    wagi. Jednym ze sposobów poprawy wagi to prawidłowa dieta.",
+};
+// debounce
+const debounce = (func, wait) => {
+  let timeout;
+
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
+// wrongData
+const wrongData = (element) => {
+  if (element) {
+    element.style.border = "2px solid red";
+    errorMassage.textContent = "Złe dane !";
+    errorMassage.style.color = "red";
+    bmi.style.display = "none";
+    calculationHandler.disabled = true;
+  }
+};
+
+// correctData
+const correctData = (element) => {
+  if (element) {
+    element.style.border = "";
+    errorMassage.textContent = "Twój wynik BMI:";
+    errorMassage.style.color = "";
+    bmi.style.display = "";
+    calculationHandler.disabled = false;
+  }
+};
+
 // validation
-function validation() {
+const validation = () => {
   const reg = new RegExp("^[0-9]+$");
-  weight.addEventListener("input", () => {
-    weight.style.border = "1px solid red";
-    if (weight.value.match(reg)) {
-      weight.style.border = "";
-    } else {
-      weight.style.border = "1px solid red";
-    }
-  });
-  height.addEventListener("input", () => {
-    height.style.border = "1px solid red";
-    if (height.value.match(reg)) {
-      height.style.border = "";
-    } else {
-      height.style.border = "1px solid red";
-    }
-  });
-}
-validation();
+  const inputsArr = [weight, height];
 
-//////////////////////////////////////////////////////////////////////////////////////
+  inputsArr.forEach((input) => {
+    input.addEventListener("input", (event) => {
+      if (!input.value.match(reg) || input.value > 500 || input.value < 20) {
+        debounce(wrongData(input), 2000);
+      } else {
+        correctData(input);
+      }
+    });
+  });
+};
+validation(); //call
+
+////////////////////////////////////////////////////////////////////////////////////
 function output() {
-  let calcResult = weight.value / ((height.value / 100) * (height.value / 100));
-  const res = calcResult.toFixed();
+  descriptionText.style.transform = "";
+  diagnosis.style.transform = "";
 
-  wynik.style.display = "";
+  let calcResult =
+    weight.value / ((height.value / 100) * (height.value / 100)).toFixed();
+  console.log(calcResult);
 
-  if (!res || weight.value < 10 || height.value < 60) {
-    resultText.style.color = "red";
-    resultText.textContent = "Złe dane !";
-    height.style.border = "1px solid red";
-    weight.style.border = "1px solid red";
-    document.querySelector(".result-title").style.display = "none";
-    wynikText.style.transform = "translateX(-2000%)";
-    wynik.style.display = "none";
-    return;
-  } else {
-    const step = 0.1;
+  if (calcResult) {
+    const step = 0.09;
     const time = 1000;
     let num = 0;
     let t = Math.round(time / (calcResult.toFixed(2) / step));
@@ -54,88 +102,100 @@ function output() {
       if (num >= calcResult.toFixed(2)) {
         clearInterval(interval);
       }
-      resultText.textContent = `${num.toFixed(2)}`;
+      bmi.textContent = `${num.toFixed(2)}`;
     }, t);
+  } else {
+    wrongData();
   }
 
-  function calc(color, diagnosis, progress, translate) {
-    progressWidth.style.background = color;
-    diagnosisText.innerHTML = diagnosis;
-    let percent = progress + res / 2;
+  function calc(color, diagnosisText, progress, description) {
+    let percent = progress + calcResult / 2;
     if (percent > 100) {
       percent = 99;
     }
     progressWidth.style.width = `${percent}%`;
-    diagnosisText.style.color = color;
-    resultText.style.color = color;
-    wynik.innerHTML = `Twój wynik to ${diagnosis.toLocaleLowerCase()}!`;
-    wynikText.style.transform = `translateX(${translate}%)`;
+    progressWidth.style.background = color;
+    diagnosis.innerHTML = `Twój wynik to ${diagnosisText.toLocaleLowerCase()}!`;
+    diagnosis.style.color = color;
+    bmi.style.color = color;
+    descriptionText.innerHTML = `${description}`;
   }
 
   function conditions() {
-    if (res <= 16) {
-      calc("#1d3057", "Wygłodzenie", 8, 0);
+    if (calcResult <= 16) {
+      calc("#1d3057", "Wygłodzenie", 8, textData.wyglodzenie);
     }
-    if (res >= 16 && res < 17) {
-      calc("#3a63b5", "Wychudzenie", 20, 0);
+    if (calcResult >= 16 && calcResult < 17) {
+      calc("#3a63b5", "Wychudzenie", 20, textData.wychudzenie);
     }
-    if (res >= 17 && res < 18.5) {
-      calc("#369adc", "Niedowaga", 35, 0);
+    if (calcResult >= 17 && calcResult < 18.5) {
+      calc("#369adc", "Niedowaga", 35, textData.niedowaga);
     }
-    if (res >= 18.5 && res < 25) {
-      calc("#68a13a", "Waga prawidłowa", 40, -2000);
+    if (calcResult >= 18.5 && calcResult < 25) {
+      calc("#68a13a", "Waga prawidłowa", 40, textData.wagaPrawidlowa);
     }
-    if (res >= 25 && res < 30) {
-      calc("#e66a17", "Nadwaga", 50, 0);
+    if (calcResult >= 25 && calcResult < 30) {
+      calc("#e66a17", "Nadwaga", 50, textData.nadwaga);
     }
-    if (res >= 30 && res < 35) {
-      calc("#e84600", "I stopień otyłości", 70, 0);
+    if (calcResult >= 30 && calcResult < 35) {
+      calc("#e84600", "1 stopień otyłości", 70, textData.stopienOtylosci1);
     }
-    if (res >= 35 && res < 40) {
-      calc("#b83e09", "II stopień otyłości", 85, 0);
+    if (calcResult >= 35 && calcResult < 40) {
+      calc("#b83e09", "2 stopień otyłości", 85, textData.stopienOtylosci2);
     }
-    if (res >= 40) {
-      calc("#8a300a", "III stopień otyłości (otyłość skrajna)", 90, 0);
+    if (calcResult >= 40) {
+      calc(
+        "#8a300a",
+        "3 stopień otyłości (otyłość skrajna)",
+        90,
+        textData.stopienOtylosci3
+      );
     }
   }
-
-  setTimeout(conditions, 1000);
   ///Animation
   function animation() {
-    wynik.classList.add("active");
-    wynikText.classList.add("active");
+    diagnosis.classList.add("active");
+    descriptionText.classList.add("active");
   }
-  setTimeout(animation, 1000);
-  return calcResult;
+  setTimeout(conditions, 1000);
+
+  setTimeout(animation, 500);
 }
 
 function reset() {
   weight.value = "";
   height.value = "";
-  resultText.innerHTML = "00:00";
-  resultText.style.color = "#999";
+  bmi.innerHTML = "00:00";
+  bmi.style.color = "#999";
   progressWidth.style.width = `0%`;
-  diagnosis = "";
-  wynik.textContent = "";
-  wynikText.style.transform = "translateX(-2000%)";
-  diagnosisText.innerHTML = "";
+  descriptionText.style.transform = "translateX(-2000%)";
+  diagnosis.style.transform = "translateX(2000%)";
 }
 
 function doThis(event) {
   if (!isClick && weight.value && height.value) {
-    resultBtn.innerHTML = "Reset";
+    calculationHandler.innerHTML = "Reset";
     isClick = true;
     output();
   } else {
-    resultBtn.innerHTML = "Przelicz";
+    calculationHandler.innerHTML = "Przelicz";
     isClick = false;
     reset();
+    correctData();
+  }
+
+  if (!isClick) {
+    height.disabled = false;
+    weight.disabled = false;
+  } else {
+    weight.disabled = true;
+    height.disabled = true;
   }
 }
 
 let isClick = false;
 
-resultBtn.addEventListener("click", () => {
+calculationHandler.addEventListener("click", () => {
   doThis();
 });
 

@@ -18,6 +18,8 @@
               class="input main-styles"
               placeholder="cm "
               type="number"
+              min="10"
+              max="300"
               autofocus
             />
           </div>
@@ -28,27 +30,26 @@
               class="input main-styles"
               placeholder="kg "
               type="number"
+              min="50"
+              max="500"
             />
           </div>
         </div>
-        <button id='result-btn' class="btn main-styles">Przelicz</button>
+        <button id="result-btn" class="btn main-styles">Przelicz</button>
       </div>
 
       <div class="progress__container">
-        <p class="diagnosis calc-sub-title"></p>
+        <p class="diagnosis"></p>
         <div class="progress">
-          <div class="progress-bar"></div>
+          <div class="progress-bar">
+          </div>
         </div>
       </div>
       <div class="result__wrapper">
         <span class="calc-sub-title result-title">Twój wynik BMI:</span>
         <span class="result-text calc-sub-title">00.00</span>
       </div>
-      <h5 class="wynik"></h5>
-      <p class="wynik-text">
-        Niestety Twoja waga jest nieprawidłowa. Musisz zadbać o stan swojej
-        wagi. Jednym ze sposobów poprawy wagi to prawidłowa dieta.
-      </p>
+      <p class="description-text"></p>
     </section>
     <script src="./script.js"></script>
   </body>
