@@ -3,7 +3,7 @@
 const weight = document.getElementById("weight");
 const height = document.getElementById("height");
 
-const errorMassage = document.querySelector(".result-title");
+const errorMassage = document.querySelector(".error-massage");
 
 const calculationHandler = document.querySelector("#result-btn");
 const bmi = document.querySelector(".result-text");
@@ -48,12 +48,7 @@ const debounce = (func, wait) => {
 const wrongData = (element) => {
   if (element) {
     element.style.border = "2px solid red";
-    bmi.style.display = "none";
-
-    errorMassage.textContent = "Złe dane !";
-    errorMassage.style.color = "red";
-    errorMassage.style.top = "0";
-    errorMassage.style.left = "0";
+    errorMassage.style.opacity = "1";
     calculationHandler.disabled = true;
   }
 };
@@ -62,11 +57,7 @@ const wrongData = (element) => {
 const correctData = (element) => {
   if (element) {
     element.style.border = "";
-    errorMassage.textContent = "Twój wynik BMI:";
-    errorMassage.style.color = "";
-    errorMassage.style.top = "";
-    errorMassage.style.left = "";
-    bmi.style.display = "";
+    errorMassage.style.opacity = "";
     calculationHandler.disabled = false;
   }
 };
@@ -80,7 +71,8 @@ const validation = () => {
     input.addEventListener("input", (event) => {
       if (!input.value.match(reg) || input.value > 500 || input.value < 20) {
         debounce(wrongData(input), 2000);
-      } else {
+      }
+       else {
         correctData(input);
       }
     });
