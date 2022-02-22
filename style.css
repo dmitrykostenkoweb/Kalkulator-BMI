@@ -173,7 +173,7 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: #e61717;
 }
 button:disabled,
-button[disabled]{
+button[disabled] {
   border: 1px solid #999999;
   background-color: #c29c83;
   color: #666666;
@@ -231,6 +231,7 @@ button[disabled]{
   font-weight: 600;
   padding: 0 16px;
   text-shadow: 0 1px black;
+  color: #999;
 }
 .diagnosis {
   font-size: 16px;
@@ -242,10 +243,21 @@ button[disabled]{
   font-weight: 600;
 }
 .result__wrapper {
+  position: relative;
+  width: 150px;
   display: flex;
   align-items: center;
-  /* justify-content: center; */
+  flex-direction: column;
 }
+
+@media (min-width: 390px) {
+  .result-title {
+    position: absolute;
+    left: -100px;
+    top: 15px;
+  }
+}
+
 .description-text {
   color: #666666;
   font-size: 16px;

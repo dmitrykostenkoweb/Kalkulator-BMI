@@ -48,9 +48,12 @@ const debounce = (func, wait) => {
 const wrongData = (element) => {
   if (element) {
     element.style.border = "2px solid red";
+    bmi.style.display = "none";
+
     errorMassage.textContent = "Złe dane !";
     errorMassage.style.color = "red";
-    bmi.style.display = "none";
+    errorMassage.style.top = "0";
+    errorMassage.style.left = "0";
     calculationHandler.disabled = true;
   }
 };
@@ -61,6 +64,8 @@ const correctData = (element) => {
     element.style.border = "";
     errorMassage.textContent = "Twój wynik BMI:";
     errorMassage.style.color = "";
+    errorMassage.style.top = "";
+    errorMassage.style.left = "";
     bmi.style.display = "";
     calculationHandler.disabled = false;
   }
