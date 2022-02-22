@@ -104,7 +104,7 @@ function output() {
 
         setTimeout(() => {
           bmi.textContent = calcResult.toFixed(2);
-        }, 500);
+        }, 1);
       }
       bmi.textContent = `${num.toFixed(2)}`;
     }, t);
