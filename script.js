@@ -92,7 +92,7 @@ function output() {
   console.log(calcResult);
 
   if (calcResult) {
-    const step = 0.1;
+    const step = 0.09;
     const time = 0;
     let num = 0;
     let t = Math.round(time / (calcResult.toFixed(2) / step));
