@@ -88,19 +88,23 @@ function output() {
   descriptionText.style.transform = "";
   diagnosis.style.transform = "";
 
-  let calcResult =
-    weight.value / ((height.value / 100) * (height.value / 100)).toFixed();
+  let calcResult = weight.value / ((height.value / 100) * (height.value / 100));
   console.log(calcResult);
 
   if (calcResult) {
-    const step = 0.09;
-    const time = 1000;
+    const step = 0.1;
+    const time = 0;
     let num = 0;
     let t = Math.round(time / (calcResult.toFixed(2) / step));
+
     let interval = setInterval(() => {
       num = num + step;
       if (num >= calcResult.toFixed(2)) {
         clearInterval(interval);
+
+        setTimeout(() => {
+          bmi.textContent = calcResult.toFixed(2);
+        }, 500);
       }
       bmi.textContent = `${num.toFixed(2)}`;
     }, t);
